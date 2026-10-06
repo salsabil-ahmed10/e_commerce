@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../viewmodels/cart_viewmodel.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../viewmodels/cart_cubit.dart';
+import '../viewmodels/cart_state.dart';
 
-/// Home / Cart / Profile — بيتحدّث لوحده لما الكارت يتغير.
+
 class AppBottomNav extends StatelessWidget {
-  /// 0 = Home, 1 = Cart, 2 = Profile
   final int currentIndex;
   final ValueChanged<int> onTap;
 
@@ -19,10 +20,9 @@ class AppBottomNav extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListenableBuilder(
-      listenable: cartViewModel,
-      builder: (context, _) {
-        final count = cartViewModel.itemCount;
+    return BlocBuilder<CartCubit, CartState>(
+  builder: (context, state) {
+    final count = state.itemCount;
         return BottomNavigationBar(
           currentIndex: currentIndex,
           onTap: onTap,
