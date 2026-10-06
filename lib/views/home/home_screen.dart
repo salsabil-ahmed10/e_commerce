@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/product.dart';
-import '../../viewmodels/cart_viewmodel.dart';
+import '../../viewmodels/cart_cubit.dart';
+import '../../viewmodels/cart_state.dart';
 import '../../widgets/app_bottom_nav.dart';
 import '../../widgets/product_image.dart';
 import '../cart/cart_screen.dart';
@@ -9,10 +11,7 @@ import '../cart/cart_screen.dart';
 class HomeScreen extends StatefulWidget {
   final List<Product> products;
 
-  const HomeScreen({
-    super.key,
-    required this.products,
-  });
+  const HomeScreen({super.key, required this.products});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -24,7 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
   static const _brown = Color(0xFF8B5E52);
 
   void _addToCart(Product product) {
-    cartViewModel.addToCart(product);
+    context.read<CartCubit>().addToCart(product);
+
 
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
@@ -39,9 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void _openCart() {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (_) => const CartScreen(),
-      ),
+      MaterialPageRoute(builder: (_) => const CartScreen()),
     );
   }
 
@@ -111,10 +109,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
 
         // Cart icon + number
-        ListenableBuilder(
-          listenable: cartViewModel,
-          builder: (context, _) {
-            final count = cartViewModel.itemCount;
+        BlocBuilder<CartCubit, CartState>(
+          builder: (context, state) {
+            final count = state.itemCount;
 
             return IconButton(
               onPressed: _openCart,
@@ -148,9 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
         filled: true,
         fillColor: const Color(0xFFE6DAD2),
 
-        contentPadding: const EdgeInsets.symmetric(
-          vertical: 0,
-        ),
+        contentPadding: const EdgeInsets.symmetric(vertical: 0),
 
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
@@ -198,24 +193,16 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // =========================
   // Section Title
-  // =========================
 
   Widget _buildSectionTitle() {
     return const Text(
       'Our Favorites',
-      style: TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-        color: _dark,
-      ),
+      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: _dark),
     );
   }
 
-  // =========================
   // Products Grid
-  // =========================
 
   Widget _buildGrid() {
     return GridView.builder(
@@ -231,34 +218,24 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisSpacing: 12,
         crossAxisSpacing: 12,
 
-        // الكارت أطول شوية عشان الصورة تبان
         childAspectRatio: 0.68,
       ),
 
       itemBuilder: (context, index) {
         final product = widget.products[index];
 
-        return _ProductCard(
-          product: product,
-          onAdd: () => _addToCart(product),
-        );
+        return _ProductCard(product: product, onAdd: () => _addToCart(product));
       },
     );
   }
 }
 
-// ==========================================
 // Product Card
-// ==========================================
-
 class _ProductCard extends StatelessWidget {
   final Product product;
   final VoidCallback onAdd;
 
-  const _ProductCard({
-    required this.product,
-    required this.onAdd,
-  });
+  const _ProductCard({required this.product, required this.onAdd});
 
   @override
   Widget build(BuildContext context) {
@@ -292,10 +269,7 @@ class _ProductCard extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
 
-            style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w500,
-            ),
+            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
           ),
 
           const SizedBox(height: 2),
@@ -303,10 +277,7 @@ class _ProductCard extends StatelessWidget {
           // Price
           Text(
             '\$${product.price}',
-            style: const TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-            ),
+            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
           ),
 
           const SizedBox(height: 5),
@@ -334,10 +305,7 @@ class _ProductCard extends StatelessWidget {
 
               child: const Text(
                 'Add to Cart',
-                style: TextStyle(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w500),
               ),
             ),
           ),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'viewmodels/cart_cubit.dart';
 import 'views/login/login_screen.dart';
 
 void main() {
@@ -10,9 +13,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const LoginScreen(),
+    return BlocProvider(
+      create: (_) => CartCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: const LoginScreen(),
+      ),
     );
   }
 }
