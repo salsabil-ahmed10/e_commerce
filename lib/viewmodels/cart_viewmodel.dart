@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import '../model/cart_item.dart';
-import '../model/product.dart';
+import '../models/cart_item.dart';
+import '../models/product.dart';
 
-class CartProvider extends ChangeNotifier {
+class CartViewModel extends ChangeNotifier {
   final List<CartItem> _items = [];
 
   List<CartItem> get items => List.unmodifiable(_items);
 
-  /// العدد الحقيقي = مجموع كميات كل المنتجات (مش عدد الأصناف)
   int get itemCount => _items.fold(0, (sum, item) => sum + item.quantity);
 
   double get total =>
@@ -59,6 +58,4 @@ class CartProvider extends ChangeNotifier {
   }
 }
 
-/// نسخة واحدة مشتركة بين كل الشاشات (الهوم والكارت)
-/// من غير ما تحتاجي package اسمه provider.
-final CartProvider cartProvider = CartProvider();
+final CartViewModel cartViewModel = CartViewModel();

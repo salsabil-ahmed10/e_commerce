@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'home_screen.dart';
-import '../data/products.dart';
+import '../home/home_screen.dart';
+import '../../data/products.dart';
 
 
 class LoginScreen extends StatefulWidget {

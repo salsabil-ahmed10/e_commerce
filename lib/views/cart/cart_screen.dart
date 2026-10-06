@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../model/cart_item.dart';
-import '../providers/cart_provider.dart';
-import '../widgets/app_bottom_nav.dart';
-import '../widgets/product_image.dart';
+import '../../models/cart_item.dart';
+import '../../viewmodels/cart_viewmodel.dart';
+import '../../widgets/app_bottom_nav.dart';
+import '../../widgets/product_image.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -30,9 +30,9 @@ class CartScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: ListenableBuilder(
-          listenable: cartProvider,
+          listenable: cartViewModel,
           builder: (context, _) {
-            final items = cartProvider.items;
+            final items = cartViewModel.items;
             if (items.isEmpty) return _buildEmpty(context);
 
             return Column(
@@ -61,7 +61,7 @@ class CartScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        money(cartProvider.total),
+                        money(cartViewModel.total),
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
@@ -181,7 +181,7 @@ class _CartRow extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: () => cartProvider.removeFromCart(p.id),
+            onPressed: () => cartViewModel.removeFromCart(p.id),
             icon: const Icon(Icons.delete_outline, color: _dark),
           ),
         ],
@@ -212,7 +212,7 @@ class _QtyStepper extends StatelessWidget {
             visualDensity: VisualDensity.compact,
             // الحذف بالزرار بتاع الزبالة؛ الناقص بيقف عند 1
             onPressed:
-                item.quantity > 1 ? () => cartProvider.decreaseQuantity(id) : null,
+                item.quantity > 1 ? () => cartViewModel.decreaseQuantity(id) : null,
             icon: const Icon(Icons.remove, size: 18),
             color: _dark,
           ),
@@ -226,7 +226,7 @@ class _QtyStepper extends StatelessWidget {
           ),
           IconButton(
             visualDensity: VisualDensity.compact,
-            onPressed: () => cartProvider.increaseQuantity(id),
+            onPressed: () => cartViewModel.increaseQuantity(id),
             icon: const Icon(Icons.add, size: 18),
             color: _dark,
           ),

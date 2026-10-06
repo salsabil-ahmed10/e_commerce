@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../providers/cart_provider.dart';
+import '../viewmodels/cart_viewmodel.dart';
 
 /// Home / Cart / Profile — بيتحدّث لوحده لما الكارت يتغير.
 class AppBottomNav extends StatelessWidget {
@@ -20,9 +20,9 @@ class AppBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListenableBuilder(
-      listenable: cartProvider,
+      listenable: cartViewModel,
       builder: (context, _) {
-        final count = cartProvider.itemCount;
+        final count = cartViewModel.itemCount;
         return BottomNavigationBar(
           currentIndex: currentIndex,
           onTap: onTap,

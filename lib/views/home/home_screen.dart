@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../model/product.dart';
-import '../providers/cart_provider.dart';
-import '../widgets/app_bottom_nav.dart';
-import '../widgets/product_image.dart';
-import 'cart_screen.dart';
+import '../../models/product.dart';
+import '../../viewmodels/cart_viewmodel.dart';
+import '../../widgets/app_bottom_nav.dart';
+import '../../widgets/product_image.dart';
+import '../cart/cart_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final List<Product> products;
@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   static const _brown = Color(0xFF8B5E52);
 
   void _addToCart(Product product) {
-    cartProvider.addToCart(product);
+    cartViewModel.addToCart(product);
 
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
@@ -112,9 +112,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
         // Cart icon + number
         ListenableBuilder(
-          listenable: cartProvider,
+          listenable: cartViewModel,
           builder: (context, _) {
-            final count = cartProvider.itemCount;
+            final count = cartViewModel.itemCount;
 
             return IconButton(
               onPressed: _openCart,

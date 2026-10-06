@@ -1,4 +1,4 @@
-import '../model/product.dart';
+import '../models/product.dart';
 
 final List<Product> products = [
 
