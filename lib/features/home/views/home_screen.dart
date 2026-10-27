@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../models/product.dart';
-import '../../viewmodels/cart_cubit.dart';
-import '../../viewmodels/cart_state.dart';
-import '../../widgets/app_bottom_nav.dart';
-import '../../widgets/product_image.dart';
-import '../cart/cart_screen.dart';
+import '../../../core/models/product.dart';
+import '../../cart/viewmodels/cart_cubit.dart';
+import '../../cart/viewmodels/cart_state.dart';
+import '../../../core/widgets/app_bottom_nav.dart';
+import '../../../core/widgets/product_image.dart';
+import '../../cart/views/cart_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final List<Product> products;

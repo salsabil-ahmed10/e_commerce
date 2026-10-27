@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../models/cart_item.dart';
-import '../../viewmodels/cart_cubit.dart';
-import '../../viewmodels/cart_state.dart';
-import '../../widgets/app_bottom_nav.dart';
-import '../../widgets/product_image.dart';
+import '../models/cart_item.dart';
+import '../viewmodels/cart_cubit.dart';
+import '../viewmodels/cart_state.dart';
+import '../../../core/widgets/app_bottom_nav.dart';
+import '../../../core/widgets/product_image.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../viewmodels/cart_cubit.dart';
-import '../viewmodels/cart_state.dart';
+import '../../features/cart/viewmodels/cart_cubit.dart';
+import '../../features/cart/viewmodels/cart_state.dart';
 
 
 class AppBottomNav extends StatelessWidget {

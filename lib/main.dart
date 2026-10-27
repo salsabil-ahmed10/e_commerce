@@ -1,8 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'viewmodels/cart_cubit.dart';
-import 'views/login/login_screen.dart';
+import 'features/auth/views/data/auth_repository.dart';
+import 'features/auth/views/viewmodel/login_cubit.dart';
+import 'features/cart/viewmodels/cart_cubit.dart';
+import 'features/auth/views/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,8 +16,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => CartCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<CartCubit>(
+          create: (_) => CartCubit(),
+        ),
+        BlocProvider<LoginCubit>(
+          create: (_) => LoginCubit(AuthRepository()),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: const LoginScreen(),
