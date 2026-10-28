@@ -43,3 +43,14 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+# Kotlin/Gradle temporary files
+android/.kotlin/
+# Java memory dump files
+*.hprof
+# Flutter generated files
+.flutter-plugins
+windows/flutter/ephemeral/
+linux/flutter/ephemeral/
+
+# Local IDE settings
+devtools_options.yaml
