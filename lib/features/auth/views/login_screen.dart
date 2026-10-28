@@ -2,8 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../home/views/home_screen.dart';
-import '../../home/data/products.dart';
+import '../../../core/routes/app_routes.dart';
 import 'viewmodel/login_cubit.dart';
 import 'viewmodel/login_state.dart';
 
@@ -57,12 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state.status == LoginStatus.success) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (_) => HomeScreen(products: products),
-            ),
-          );
+          Navigator.pushReplacementNamed(context, AppRoutes.main);
         } else if (state.status == LoginStatus.failure) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
