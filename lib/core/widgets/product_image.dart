@@ -21,21 +21,37 @@ class ProductImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget errorBuilder(BuildContext _, Object _, StackTrace? _) =>
+        const Center(
+          child: Icon(Icons.image_outlined, color: Color(0xFFB9A79D)),
+        );
+
+    // Local products use asset paths; API products use http(s) URLs.
+    final isNetwork = path.startsWith('http');
+
     return Container(
       width: width,
       height: height,
       color: tint,
-      child: Image.asset(
-        path,
-        fit: fit,
-        width: width,
-        height: height,
-        color: tintWhite ? tint : null,
-        colorBlendMode: tintWhite ? BlendMode.multiply : null,
-        errorBuilder: (_, __, ___) => const Center(
-          child: Icon(Icons.image_outlined, color: Color(0xFFB9A79D)),
-        ),
-      ),
+      child: isNetwork
+          ? Image.network(
+              path,
+              fit: fit,
+              width: width,
+              height: height,
+              color: tintWhite ? tint : null,
+              colorBlendMode: tintWhite ? BlendMode.multiply : null,
+              errorBuilder: errorBuilder,
+            )
+          : Image.asset(
+              path,
+              fit: fit,
+              width: width,
+              height: height,
+              color: tintWhite ? tint : null,
+              colorBlendMode: tintWhite ? BlendMode.multiply : null,
+              errorBuilder: errorBuilder,
+            ),
     );
   }
 }

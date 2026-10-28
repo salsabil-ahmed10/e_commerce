@@ -3,11 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../models/cart_item.dart';
 import '../viewmodels/cart_cubit.dart';
 import '../viewmodels/cart_state.dart';
-import '../../../core/widgets/app_bottom_nav.dart';
 import '../../../core/widgets/product_image.dart';
 
 class CartScreen extends StatelessWidget {
-  const CartScreen({super.key});
+  /// Called by the back arrow and the "Continue Shopping" buttons. The main
+  /// shell uses it to switch back to the Home tab.
+  final VoidCallback onContinueShopping;
+
+  const CartScreen({super.key, required this.onContinueShopping});
 
   static const _bg = Color(0xFFF5EEE8);
   static const _dark = Color(0xFF5C453D);
@@ -25,6 +28,8 @@ class CartScreen extends StatelessWidget {
         elevation: 0,
         scrolledUnderElevation: 0,
         foregroundColor: _dark,
+        // Cart is a tab now, so Flutter no longer adds the back arrow itself.
+        leading: BackButton(onPressed: onContinueShopping),
         title: const Text(
           'My Cart',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
@@ -42,7 +47,7 @@ class CartScreen extends StatelessWidget {
                   child: ListView.separated(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     itemCount: items.length,
-                    separatorBuilder: (_, __) =>
+                    separatorBuilder: (_, _) =>
                         const Divider(height: 1, color: _line),
                     itemBuilder: (_, i) => _CartRow(item: items[i]),
                   ),
@@ -78,7 +83,7 @@ class CartScreen extends StatelessWidget {
                     width: double.infinity,
                     height: 52,
                     child: ElevatedButton(
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: onContinueShopping,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: _dark,
                         foregroundColor: Colors.white,
@@ -99,12 +104,6 @@ class CartScreen extends StatelessWidget {
           },
         ),
       ),
-      bottomNavigationBar: AppBottomNav(
-        currentIndex: 1,
-        onTap: (i) {
-          if (i == 0) Navigator.pop(context);
-        },
-      ),
     );
   }
 
@@ -121,7 +120,7 @@ class CartScreen extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           ElevatedButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: onContinueShopping,
             style: ElevatedButton.styleFrom(
               backgroundColor: _dark,
               foregroundColor: Colors.white,
