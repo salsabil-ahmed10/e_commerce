@@ -119,3 +119,29 @@ For a production application, the project could be extended with:
 - Dependency injection
 - Pagination and caching
 - Payment and order management
+
+## Screenshots & Demo
+
+### Application Screenshots
+
+![Screenshot 1](screenshots/WhatsApp%20Image%202026-10-28%20at%2014.43.38.jpeg)
+
+![Screenshot 2](screenshots/WhatsApp%20Image%202026-10-28%20at%2014.43.42.jpeg)
+
+![Screenshot 3](screenshots/WhatsApp%20Image%202026-10-28%20at%2014.43.58.jpeg)
+
+![Screenshot 4](screenshots/WhatsApp%20Image%202026-10-28%20at%2014.44.00.jpeg)
+
+![Screenshot 5](screenshots/WhatsApp%20Image%202026-10-28%20at%2014.44.08.jpeg)
+
+![Screenshot 6](screenshots/WhatsApp%20Image%202026-10-28%20at%2014.44.21.jpeg)
+
+![Screenshot 7](screenshots/WhatsApp%20Image%202026-10-28%20at%2014.44.43.jpeg)
+
+![Screenshot 8](screenshots/WhatsApp%20Image%202026-10-28%20at%2014.44.58.jpeg)
+
+![Screenshot 9](screenshots/WhatsApp%20Image%202026-10-28%20at%2014.45.06.jpeg)
+
+![Screenshot 10](screenshots/WhatsApp%20Image%202026-10-28%20at%2014.45.40.jpeg)
+
+![Screenshot 11](screenshots/WhatsApp%20Image%202026-10-28%20at%2014.45.53.jpeg)
